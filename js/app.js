@@ -283,3 +283,31 @@ function currentShinyStars(x) {
 
    
 }
+
+
+function removeModal() {
+    let modalBackround = document.querySelector('.modal-background');
+    modalBackround.classList.add('hide');
+
+}
+
+function addModal() {
+    let modalBackround = document.querySelector('.modal-background');
+    modalBackround.classList.add('show');
+
+}
+
+/* 
+    Task: In Player Stat Modal, Buttons to Cancel or Replay The Game  
+    */
+
+let buttonCancel = document.querySelector('.modal-cancel');
+buttonCancel.onclick = removeModal;
+
+let buttonPlayAgain = document.querySelector('.modal-replay');
+
+
+buttonPlayAgain.onclick = function() {
+    removeModal();
+    restartTheGame();
+}
