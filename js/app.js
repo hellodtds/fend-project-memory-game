@@ -1,13 +1,12 @@
 "use strict";
 
+/***************************************************************************** */
 
 let openCard = [];
 
 let itemMatch = [];
 
-
 let deck = document.querySelector(".deck");
-
 
 // feat: list of cards used for game from: https://fontawesome.com/
 let card_list = [
@@ -34,16 +33,16 @@ let card_list = [
 // feat: star (ranking)
 let stars = document.querySelector('.stars')
 
-
 // feat: move (counter)
 let numberOfMoves = 0;
 let moves = document.querySelector(".moves");
-
 
 // feat: buttons
 //--> modal ("cancel", "replay")
 let buttonCancel = document.querySelector('.modal-cancel');
 let buttonPlayAgain = document.querySelector('.modal-replay');
+let xToCloseModal = document.querySelector('.modal-close');
+
 
 //--> restart 
 let restart = document.querySelector('.restart');
@@ -58,6 +57,7 @@ isTimerRunning,
 savedTimeClock,
 timer;
 let timeID = document.getElementById('timeID');
+
 
 let zero = function(x) {
     return 0;
@@ -76,6 +76,9 @@ let tick = function() {
 };
 
 
+/***************************************************************************** */
+
+
 // task: shuffle cards
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -87,11 +90,10 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
-// task: keep game time
+// task: keep game timer
 function stopTimer() {
     isTimerRunning = false;
     clearInterval(timer);
@@ -105,43 +107,32 @@ function startTimer() {
     timer = setInterval(tick, 1000);
 }
 
-
-/* moved into deck eventlistener */
-// createGameBoard(card_list = shuffle(card_list), deck, "li");
-
-
 // describe: card is clicked
 deck.addEventListener('click', function(e){
-
-
-    if (e.target && e.target.matches('li.card')) {
-        
+    if (e.target && e.target.matches('li.card')) {  
         if ( savedTimeClock == undefined && numberOfMoves != 0) {
             startTimer();
         }
-        
         if (openCard.length < 2) {
             pushTheCardIntoTheOpenCardArray(e);
 
             e.target.classList.toggle('show');
             e.target.classList.toggle('open');
         }
-
         if (openCard.length == 2) {
             setTimeout(match, 1000);
         }
-    
         count();
-    
         currentShinyStars(numberOfMoves);
     }
-
 });
+
 
 // task: track flipped card types (max = 2)
 function pushTheCardIntoTheOpenCardArray(e) {
     openCard.push(e.target);
 }
+
 
 // task: match cards
 function match(event) {
@@ -162,18 +153,7 @@ function match(event) {
 // task: increment moves
 function count() {
     moves.innerHTML = ++numberOfMoves;
-
-    // ifTheGameIsOver, then...
-
-    // ifTheGameIsOver();
 }
-
-
-/***************************************************************************** */
-/*
-  Simple Actions: show, open, 'give player star'
-  */
-
 
 // task: show card 
 function show(x) {
@@ -193,7 +173,6 @@ function currentShinyStars(x) {
         stars.lastElementChild.remove();    
     }   
 }
-
 
 // task: remove modal
 function removeModal() {
@@ -217,6 +196,12 @@ buttonPlayAgain.onclick = function() {
     restartTheGame();
 }
 
+xToCloseModal.onclick = function() {
+    buttonPlayAgain.click();
+};
+
+
+
 // task: restart game
 restart.onclick = restartTheGame;
 
@@ -227,18 +212,20 @@ function restartTheGame() {
 
 }
 
+
 /***************************************************************************** */
+
 
 // task: build the game board
 function createGameBoard(x, y, z) {
+
+    /* fix: variable hard code here */
     x = shuffle(card_list), 
     y=deck,
     z="li",
     savedTimeClock = undefined;
 
     y.innerHTML = '';
-
-    debugger;
 
     numberOfMoves = zero();
     moves.innerHTML = zero();
