@@ -42,31 +42,89 @@
             -->
         </ul>
 
-        <button id="stopTimer">End Gameplay</button>
-    </div>
-    
-    <!--
+     
+        
+        <style>
+                .modal-background {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.5);
+                }
+         
+                 .modal-content {
+                     position: relative;
+                     top: 50%;
+                     left: 50%;
+                     width: 300px;
+                     height: 300px;
+                     background: white;
+                     transform: translate(-50%,-83%);
+                     border-radius: 2%;
+                 
+                 }       
+         
+                 .modal-heading {
+                     display: flex;
+                     justify-content: space-between;
+                     align-items: center;
+                     padding: 0% 7%;
+                     border-bottom: 1px groove;
+                 }
+                 
+                .modal-title {
+                font-size: 2rem;
+                margin: 21px auto;
+                }
+
+                .modal-close {
+    padding: 2%;
+
+    font-size: 1.6rem;
+    position: relative;
+    top: -25px;
+    right: -15px;
+
+}
+            </style>
+         
+            <div class="modal-background">
+                 <div class="modal-content">
+                     <div class="modal-heading">
+                         <h2 class="modal-title">Player Stats</h2>
+                         <span class="modal-close"><i class="fas fa-times"></i>
+
+                         </span>
+                     </div>
+         
+                 </div>
+            </div>
+
+
+               <!--
         Modal Area, Version 1. Version 2, 
         use https://getbootstrap.com/docs/3.3/javascript/#modals 
     -->
 
-   
-    <div class="message">
+   <!-- display: flex; flex-direction: column; -->
+   <!--
+    <div class="game-stats"> 
         
+        <h2 class="game-instruction-header">Game Stats</h2>
+        <hr>
+        <span class="game-time">Time: </span>
+        <span class="game-moves">Moves:</span>
+        <span class="game-stars">Stars:</span>
+
     </div>
-    <div class="game-instructions">
-        <h2>How to Play</h2>
+   -->
 
-        <p class="styled">
-            Concentration is a great card game for both adults and kids that is a lot of fun and can improve your memory.
-            How to Play: Match up pairs to uncover the entire game board!</p>     
-    </div>
-
-   
-
-
-
-    <!-- Latest compiled and minified JavaScript -->
+    </div><!-- end .container -->
+    
+ 
+ 
 
     <script src="js/app.js"></script>
 </body>

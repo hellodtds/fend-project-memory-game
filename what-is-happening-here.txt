@@ -53,3 +53,81 @@ How to Play: Match up pairs to uncover the entire game board!
 
 
 
+// modal
+
+   <style>
+.player-message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(207, 207, 219, 0.8);
+    display: flex;
+    justify-content: flex-end;
+    /* align-self: center; */
+    
+    /* hide the modal */
+        /* display: none;   */
+}
+
+.game-instruction {
+    display:
+}
+   
+
+.game-stats {
+    /* align-self: center; */
+    /* position: relative; */
+    /* top: 50%; */
+    /* left: 50%; */
+    width: 382px;
+    height: 320px;
+    padding: 2%;
+    background: whitesmoke;
+    transform: translate(-110%, -24%);
+    border-radius: 2%;
+    /* align-content: flex-end; */
+    align-self: center;
+    /* display: none; */
+}
+   </style>
+    <div class="player-message">
+
+        <div class="game-instruction">
+            <h2 class="game-instruction-header">How to Play</h2>
+
+            <p class="styled">
+                Concentration is a great card game for both adults and kids that is a lot of fun and can improve your memory.<br>
+                Match up pairs to uncover the entire game board!</p>     
+                <button class="play-button">Play to Start!</button>
+        </div>
+
+        <style>
+            .games-stats {
+                display: flex;
+
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                width: 382px;
+    height: 320px;
+    padding: 2%;
+    background: whitesmoke;
+    transform: translate(-110%, -24%);
+    border-radius: 2%;
+            }
+        </style>
+        <div class="game-stats"> <!-- display: flex; flex-direction: column; -->
+        
+                <h2 class="game-instruction-header">Game Stats</h2>
+                <hr>
+                <span class="game-time">Time: </span>
+                <span class="game-moves">Moves:</span>
+                <span class="game-stars">Stars:</span>
+
+            </div>
+
+
+    </div>
