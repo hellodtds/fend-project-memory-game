@@ -166,3 +166,19 @@ h1 {
     text-decoration: none;
     background: rgba(0, 0, 0, 1);
 }
+
+/* 
+    Hide Modal
+    */
+
+.hide {
+    display: none;
+}
+
+/* 
+    Show Modal
+    */
+
+.show {
+    display: block;
+}
