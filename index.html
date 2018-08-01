@@ -88,16 +88,28 @@
     right: -15px;
 
 }
+.modal-player-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 3%;
+    font-size: 1.5rem;
+    font-weight: lighter;
+    border-bottom: 1px groove;
+}
             </style>
          
             <div class="modal-background">
                  <div class="modal-content">
                      <div class="modal-heading">
                          <h2 class="modal-title">Player Stats</h2>
-                         <span class="modal-close"><i class="fas fa-times"></i>
-
-                         </span>
+                         <span class="modal-close"><i class="fas fa-times"></i></span>
                      </div>
+                     <div class="modal-player-stats"> 
+                        <span class="player-time">Time: </span>
+                        <span class="player-moves">Moves:</span>
+                        <span class="player-stars">Stars:</span>
+                    </div>
          
                  </div>
             </div>
