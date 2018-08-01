@@ -1,0 +1,55 @@
+Fend Project 2 Flow:
+
+start
+
+(
+    todo: ask player name, look at udacity style guide, 
+here: https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html 
+)
+
+( 
+how to play ? true : false
+    * true: show instructions
+)
+
+play ? true : false
+    * true: shuffle cards
+        * create new game board
+
+(todo: press button to play)
+
+game timer start
+
+click card
+    * add to openCard array
+    * apply .open
+    * apply .show
+    * counter++
+
+click 2 cards
+    * match ? true : false
+    * true: add cards to matchCard array and empty openCards array
+    * false: remove .open and .show from cards
+
+    * game over ? true : false
+
+give player a shiny star
+    * counter == (5 || 10 || 25) => give star
+
+
+show modal
+    * game stats
+    * restart game ? true : false
+
+
+
+instructions:
+
+Concentration is a great card game for both adults and kids that is a lot of fun and can improve your memory.
+
+How to Play: Match up pairs to uncover the entire game board!
+
+
+
+
+
