@@ -1,10 +1,15 @@
 "use strict";
 
 
-/***************************************************************************** */
-/*
-  List of Cards Used For Game From: https://fontawesome.com/
-  */
+let openCard = [];
+
+let itemMatch = [];
+
+
+let deck = document.querySelector(".deck");
+
+
+// feat: list of cards used for game from: https://fontawesome.com/
 let card_list = [
 
     "fa-diamond",
@@ -26,12 +31,52 @@ let card_list = [
 
 ];
 
+// feat: star (ranking)
+let stars = document.querySelector('.stars')
 
-/***************************************************************************** */
-/*
-  Shuffle The Cards
-  */
 
+// feat: move (counter)
+let numberOfMoves = 0;
+let moves = document.querySelector(".moves");
+
+
+// feat: buttons
+//--> modal ("cancel", "replay")
+let buttonCancel = document.querySelector('.modal-cancel');
+let buttonPlayAgain = document.querySelector('.modal-replay');
+
+//--> restart 
+let restart = document.querySelector('.restart');
+
+// feat: time clock
+let timeStarted = true; 
+let timeContent,
+counter,
+minutes,
+seconds,
+isTimerRunning,
+savedTimeClock,
+timer;
+let timeID = document.getElementById('timeID');
+
+let zero = function(x) {
+    return 0;
+};
+
+let tick = function() {
+    if (counter < 60) {
+        seconds = counter < 10 ? `0${counter++}` : parseInt(counter++ % 60);
+    } else {
+        counter = `0${counter=0}`;
+        minutes++;
+    }
+    timeContent = `${minutes}:${seconds}`;
+    document.getElementById('timeID').textContent = timeContent;
+    savedTimeClock = timeContent;
+};
+
+
+// task: shuffle cards
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -46,96 +91,35 @@ function shuffle(array) {
     return array;
 }
 
-/***************************************************************************** */
-/* 
-    Build The Game Board
-    */
+// task: keep game time
+function stopTimer() {
+    isTimerRunning = false;
+    clearInterval(timer);
+}
 
-
-
-let deck = document.querySelector(".deck");
-
-/***************************************************************************** */
-/* 
-  Task: Reset Game,
-        Stars,
-        NumberOfMoves
-  */
-
- let restart = document.querySelector('.restart');
-
- let stars = document.querySelector('.stars')
- 
- // Initial Number of Moves, Counter
- let numberOfMoves = 0;
- let moves = document.querySelector(".moves");
-
-
-/***************************************************************************** */
-function createGameBoard(/* card_list */ x, /*  deck */ y, /* element type */ z) {
-    y.innerHTML = '';
-    let item;
-    numberOfMoves = 0;
-    moves.innerHTML = 0;
-
-    // Error in implementing forEach() 
-    for ( var i = 0; i < x.length; i++) {
-        item = document.createElement(z);
-        item.setAttribute('class', 'card');
-        item.innerHTML = `<i class='fa ${x[i]}'></i>`;
-        y.appendChild(item);
-    };
+function startTimer() {
+    isTimerRunning = true;
+    counter = zero(counter);
+    seconds = zero(seconds);
+    minutes = zero(minutes);
+    timer = setInterval(tick, 1000);
 }
 
 
-function restartTheGame() {
-    createGameBoard(card_list = shuffle(card_list), deck, "li");
-    numberOfMoves = 0;
-    moves.innerHTML = 0;
-}
-
-restart.onclick = restartTheGame;
-
-/***************************************************************************** */
-/* 
-    Task: Start Game
-    */
-
-// use createGameBoard() or doSomethingElse()
-
-// Cards Get Shuffled 
-createGameBoard(card_list = shuffle(card_list), deck, "li");
+/* moved into deck eventlistener */
+// createGameBoard(card_list = shuffle(card_list), deck, "li");
 
 
-
-/***************************************************************************** */
-/* 
-  Task: Open Cards
-  */
-let openCard = [];
-
-/***************************************************************************** */
-/*
-  DESCRIBES: What Happens When Card is Clicked?
-  */
-let timeStarted = true; 
-
-
-// document.getElementsByTagName('li').addEventListener('click', function(e){
-//     if (e.target && e.target.matches('li.card')) {
-//         e.target.classList.toggle('show');
-//     }
-// });
-
+// describe: card is clicked
 deck.addEventListener('click', function(e){
 
-    if ( savedTimeClock == undefined) {
-        startTimer();
-    }
-    
+
     if (e.target && e.target.matches('li.card')) {
         
-
+        if ( savedTimeClock == undefined && numberOfMoves != 0) {
+            startTimer();
+        }
+        
         if (openCard.length < 2) {
             pushTheCardIntoTheOpenCardArray(e);
 
@@ -154,18 +138,12 @@ deck.addEventListener('click', function(e){
 
 });
 
+// task: track flipped card types (max = 2)
 function pushTheCardIntoTheOpenCardArray(e) {
     openCard.push(e.target);
 }
 
-
-
-/***************************************************************************** */
-/* 
-  Task: Match Cards
-  */
-let itemMatch = [];
-
+// task: match cards
 function match(event) {
     if (openCard[0].children[0].className === openCard[1].children[0].className) {
         itemMatch.push(openCard[0]);
@@ -180,76 +158,14 @@ function match(event) {
 
 }
 
-/***************************************************************************** */
-/* 
-  Task: Keep Time
-  */
-let timeContent,
-    counter,
-    minutes,
-    seconds,
-    isTimerRunning,
-    savedTimeClock,
-    timer;
-    
 
-let timeID = document.getElementById('timeID');
-// timeID.addEventListener('click', startTimer);
-
-// let stopButton = document.getElementById('stopTimer');
-
-// stopButton.addEventListener('click', function() {
-//     clearInterval(timer);
-//     isTimerRunning = false;
-// });
-
-
-let tick = function() {
-    if (counter < 60) {
-        seconds = counter < 10 ? `0${counter++}` : parseInt(counter++ % 60);
-    } else {
-        counter = `0${counter=0}`;
-        minutes++;
-    }
-    timeContent = `${minutes}:${seconds}`;
-    document.getElementById('timeID').textContent = timeContent;
-    savedTimeClock = timeContent;
-};
-
-let zero = function(x) {
-    return 0;
-};
-
-function startTimer() {
-    isTimerRunning = true;
-    counter = zero(counter);
-    seconds = zero(seconds);
-    minutes = zero(minutes);
-    timer = setInterval(tick, 1000);
-}
-
-
-/***************************************************************************** */
-
-
-
-/*
-    Task: Increment Move Counter
-*/
-
+// task: increment moves
 function count() {
-    // consider MAX number of moves
-    // if numberOfMoves < 16, 3 stars ?
-
-
-
     moves.innerHTML = ++numberOfMoves;
 
+    // ifTheGameIsOver, then...
 
-
-    // // ifTheGameIsOver
     // ifTheGameIsOver();
-
 }
 
 
@@ -258,56 +174,83 @@ function count() {
   Simple Actions: show, open, 'give player star'
   */
 
-// show card 
+
+// task: show card 
 function show(x) {
     x = x.classList;
     return x.toggle("show");
 }
 
-
-// // open card
+// task: open card
 function open(x) {
     x = x.classList;
     return x.toggle("open");
 }
 
 
-
 function currentShinyStars(x) {
-
     if (x % card_list.length === 0) {
-
-        stars.lastElementChild.remove();
-    
-    }
-
-   
+        stars.lastElementChild.remove();    
+    }   
 }
 
 
+// task: remove modal
 function removeModal() {
     let modalBackround = document.querySelector('.modal-background');
     modalBackround.classList.add('hide');
-
 }
 
+// task: add modal
 function addModal() {
     let modalBackround = document.querySelector('.modal-background');
     modalBackround.classList.add('show');
 
 }
 
-/* 
-    Task: In Player Stat Modal, Buttons to Cancel or Replay The Game  
-    */
 
-let buttonCancel = document.querySelector('.modal-cancel');
+// task: cancel or replay (modal-buttons) 
 buttonCancel.onclick = removeModal;
-
-let buttonPlayAgain = document.querySelector('.modal-replay');
-
 
 buttonPlayAgain.onclick = function() {
     removeModal();
     restartTheGame();
 }
+
+// task: restart game
+restart.onclick = restartTheGame;
+
+function restartTheGame() {
+    stopTimer();
+    createGameBoard();
+
+
+}
+
+/***************************************************************************** */
+
+// task: build the game board
+function createGameBoard(x, y, z) {
+    x = shuffle(card_list), 
+    y=deck,
+    z="li",
+    savedTimeClock = undefined;
+
+    y.innerHTML = '';
+
+    debugger;
+
+    numberOfMoves = zero();
+    moves.innerHTML = zero();
+
+    timeID.innerHTML = '0:00';
+
+    // Error in implementing forEach() 
+    for ( var i = 0; i < x.length; i++) {
+        let item = document.createElement(z);
+        item.setAttribute('class', 'card');
+        item.innerHTML = `<i class='fa ${x[i]}'></i>`;
+        y.appendChild(item);
+    };
+}
+
