@@ -116,55 +116,12 @@ h1 {
 
 
 /* 
- * CSS: PLAYER MSG
+ * feat: modal window
  */
 
-.message {
-    width: 100%;
-    height: 100%;
-    display: none;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    background: rgba(0, 0, 0, 0.75);
-}
-
-.message-inner {
-    max-width: 700px;
-    width: 90%;
-    padding: 40px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 1);
-    border-radius: 3px;
-    background: #fff;
-}
-
-.message-close {
-    width: 30px;
-    height: 30px;
-    padding-top: 4px;
-    display: inline-block;
-    position: absolute;
-    top: 0px;
-    right: 0px;
+.modal-close:hover {
     transition: ease 0.25s all;
-    transform: translate(50%, -50%);
-    border-radius: 100px;
-    background: rgba(0, 0, 0, 0.8);
-    font-family: Arial, sans-serif;
-    font-size: 20px;
-    text-align: center;
-    line-height: 100%;
-    color: #fff;
-}
-
-.message-close:hover {
-    transform: translate(50%, -50%) rotate(180deg);
-    text-decoration: none;
-    background: rgba(0, 0, 0, 1);
+    transform: rotate(270deg);
 }
 
 /* 
@@ -181,4 +138,70 @@ h1 {
 
 .show {
     display: block;
+}
+
+
+.modal-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+ .modal-content {
+     position: relative;
+     top: 50%;
+     left: 50%;
+     width: 300px;
+     /* height: 300px; */
+     background: white;
+     transform: translate(-50%,-87%);
+     border-radius: 2%;
+ 
+ }       
+
+ .modal-heading {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 0% 7%;
+     border-bottom: 1px groove;
+ }
+ 
+.modal-title {
+font-size: 2rem;
+margin: 21px auto;
+}
+
+.modal-close {
+padding: 2%;
+
+font-size: 1.6rem;
+position: relative;
+top: -25px;
+right: -15px;
+
+}
+.modal-player-stats {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding-top: 3%;
+font-size: 1.5rem;
+font-weight: lighter;
+border-bottom: 1px groove;
+}
+
+.modal-buttons {
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+padding: 1rem;
+}
+
+.modal-button {
+width: 80px;
+height: 40px;
 }
