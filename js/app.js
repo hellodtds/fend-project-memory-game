@@ -248,7 +248,7 @@ function count() {
 
     moves.innerHTML = ++numberOfMoves;
 
-    if (numberOfMoves ===  || numberOfMoves === 10 || numberOfMoves === 15) {
+    if (numberOfMoves === 5 || numberOfMoves === 10 || numberOfMoves === 15) {
 
         
         givePlayerShinyStar();
