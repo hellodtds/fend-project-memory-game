@@ -55,7 +55,20 @@ function shuffle(array) {
 
 let deck = document.querySelector(".deck");
 
+/***************************************************************************** */
+/* 
+  Task: Reset Game,
+        Stars,
+        NumberOfMoves
+  */
 
+ let restart = document.querySelector('.restart');
+
+ let stars = document.querySelector('.stars')
+ 
+ // Initial Number of Moves, Counter
+ let numberOfMoves = 0;
+ let moves = document.querySelector(".moves");
 
 
 /***************************************************************************** */
@@ -64,10 +77,6 @@ function createGameBoard(/* card_list */ x, /*  deck */ y, /* element type */ z)
     let item;
     numberOfMoves = 0;
     moves.innerHTML = 0;
-    
-
-        stars.innerHTML = '';
-
 
     // Error in implementing forEach() 
     for ( var i = 0; i < x.length; i++) {
@@ -77,26 +86,12 @@ function createGameBoard(/* card_list */ x, /*  deck */ y, /* element type */ z)
         y.appendChild(item);
     };
 }
-/***************************************************************************** */
-/* 
-  Task: Reset Game,
-        Stars,
-        NumberOfMoves
-  */
 
-let restart = document.querySelector('.restart');
-
-let stars = document.querySelector('.stars')
-
-// Initial Number of Moves, Counter
-let numberOfMoves = 0;
-let moves = document.querySelector(".moves");
 
 function restartTheGame() {
     createGameBoard(card_list = shuffle(card_list), deck, "li");
     numberOfMoves = 0;
     moves.innerHTML = 0;
-    stars.innerHTML = '';
 }
 
 restart.onclick = restartTheGame;
@@ -153,6 +148,8 @@ deck.addEventListener('click', function(e){
         }
     
         count();
+    
+        currentShinyStars(numberOfMoves);
     }
 
 });
@@ -248,11 +245,7 @@ function count() {
 
     moves.innerHTML = ++numberOfMoves;
 
-    if (numberOfMoves === 5 || numberOfMoves === 10 || numberOfMoves === 15) {
 
-        
-        givePlayerShinyStar();
-    }
 
     // // ifTheGameIsOver
     // ifTheGameIsOver();
@@ -280,8 +273,13 @@ function open(x) {
 
 
 
-function givePlayerShinyStar() {
-    stars.innerHTML += `<li><i class="fa fa-star"></i></li>`;
+function currentShinyStars(x) {
+
+    if (x % card_list.length === 0) {
+
+        stars.lastElementChild.remove();
+    
+    }
+
+   
 }
-
-
