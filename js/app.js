@@ -42,7 +42,7 @@ let moves = document.querySelector(".moves");
 let buttonCancel = document.querySelector('.modal-cancel');
 let buttonPlayAgain = document.querySelector('.modal-replay');
 let xToCloseModal = document.querySelector('.modal-close');
-
+let modalContent = document.querySelector('.modal-content');
 
 //--> restart 
 let restart = document.querySelector('.restart');
@@ -109,6 +109,9 @@ function startTimer() {
 
 // describe: card is clicked
 deck.addEventListener('click', function(e){
+
+
+
     if (e.target && e.target.matches('li.card')) {  
         if ( savedTimeClock == undefined && numberOfMoves != 0) {
             startTimer();
@@ -122,9 +125,17 @@ deck.addEventListener('click', function(e){
         if (openCard.length == 2) {
             setTimeout(match, 1000);
         }
+        
+        if ( itemMatch.length === 16 ) {
+            modalContent.addModal();
+        }
+        
+
         count();
         currentShinyStars(numberOfMoves);
+        
     }
+ 
 });
 
 
@@ -175,35 +186,31 @@ function currentShinyStars(x) {
 }
 
 // task: remove modal
-function removeModal() {
-    let modalBackround = document.querySelector('.modal-background');
-    modalBackround.classList.add('hide');
+function removeModal(x) {  
+    x.classList.add('hide');
 }
 
 // task: add modal
-function addModal() {
-    let modalBackround = document.querySelector('.modal-background');
-    modalBackround.classList.add('show');
+function addModal(x) {
+    x.classList.add('show');
 
 }
 
 
 // task: cancel or replay (modal-buttons) 
-buttonCancel.onclick = removeModal;
+buttonCancel.onclick = removeModal(buttonCancel);
 
 buttonPlayAgain.onclick = function() {
-    removeModal();
+    removeModal(buttonPlayAgain);
     restartTheGame();
 }
 
-xToCloseModal.onclick = function() {
-    buttonPlayAgain.click();
-};
+xToCloseModal.onclick = removeModal(xToCloseModal);
 
 
 
 // task: restart game
-restart.onclick = restartTheGame;
+restart.onclick = restartTheGame();
 
 function restartTheGame() {
     stopTimer();
@@ -212,6 +219,19 @@ function restartTheGame() {
 
 }
 
+let isTheGameIsOver = false;
+
+// // task: game over
+// function ifTheGameIsOver() {
+//     if ( itemMatch.length === 16 ) addModal();
+//     xToCloseModal.remove();
+  
+// }
+
+// // feat: show player stats
+// function showPlayerStats() {
+
+// }
 
 /***************************************************************************** */
 
